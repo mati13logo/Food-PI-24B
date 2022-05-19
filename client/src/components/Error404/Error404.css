@@ -1,0 +1,11 @@
+.Error404{
+    width: 40vh;
+    height: 40vh;
+    background-color: grey;
+    opacity: 0.9;
+    border: solid 2px;
+    border-radius: 0.7em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around
+}

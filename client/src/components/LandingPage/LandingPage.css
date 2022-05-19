@@ -1,0 +1,58 @@
+.contenedor1 {
+    background-position: center center;
+    background-image: url("https://img.freepik.com/vector-gratis/bon-appetit-patron-fondo-transparente-ingredientes-dispersos-utensilios-cocina-hacer-pasta-ravioles-italianos-formato-cuadrado-adecuado-papel-tapiz-tela_1284-44086.jpg?w=2000");
+    /* display: flex; */
+    display: flex;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.contenedorPrincipal {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.boton {
+    opacity: 0.9;
+    border-radius: 0.7em;
+    border: 2px solid;
+    font: inherit;
+    margin: 0.5em;
+    padding: 0.7em 2em;
+    transition-duration: 0.4s;
+    background: none;
+    line-height: 1;
+    font-weight: 400;
+    color: #ffa260;
+    background: hsl(227, 10%, 10%);
+    font: 300 1em 'Fira Sans', sans-serif;
+}
+
+.boton:hover,
+.boton:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(adjust-hue(#ffa260, 45deg));
+    transform: translateY(-0.25em);
+    /* border-color: var(adjust-hue(#ffa260, 45deg)); */
+    /* color: adjust-hue(#ffa260, 45deg); */
+
+}
+
+
+.titulo {
+    display: flex;
+    border-radius: 0.7em;
+    opacity: 0.9;
+    font: 300 2em 'Fira Sans', sans-serif;
+    border: 2px solid;
+    background: hsl(227, 10%, 10%);
+    color: #ffa260;
+    padding: 1em 2em;
+    margin: 0.5em;
+    /* font-weight: 400; */
+}

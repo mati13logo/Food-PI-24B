@@ -1,0 +1,46 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    font: 1.3em 'Fira Sans', sans-serif ;
+    color:  white;
+    border: solid black 2px;
+    height: 650px;
+    padding: 10px;
+    margin-bottom: 25px;
+    background: gray;
+    border-radius: 0.7em;
+}
+.contenedorDiets{
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.85em;
+
+}
+h5{
+    font-size: 1.2em;
+    margin: 0%;
+    margin-bottom: 10px;
+    /* text-decoration: none; */
+}
+p{
+    display: flex;
+    margin: 0%;
+    margin-bottom: 5px;
+    justify-content: flex-start;
+    /* font: 300 'Fira Sans', sans-serif; */
+}
+img{
+    border-radius: 0.7em;
+    border: solid black 2px;
+    margin: 4px;
+    width: 50vh;
+    /* height: 50vh; */
+    /* height: 100%; */
+    /* width: 50%; */
+
+}
+
+a{
+    text-decoration: none;
+}

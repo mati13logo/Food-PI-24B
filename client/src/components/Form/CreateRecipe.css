@@ -1,0 +1,44 @@
+.error{
+    font-size: large;
+    color: red;
+}
+.contenedorPlantilla{
+    margin-top: 200px;
+    background: grey;
+    /* margin: auto; */
+    margin: auto 45vh auto 45vh;
+    border: solid 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    border-radius: 0.7em;
+}
+input{
+    width: 200px;
+    border-radius: 0.7em;
+    border: 2px solid;
+    font: inherit;
+    margin: 0.5em;
+    padding: 0.7em 2em;
+}
+select{
+    width: 200px;
+    border-radius: 0.7em;
+    border: 2px solid;
+    font: inherit;
+    margin: 0.5em;
+    padding: 0.7em;
+}
+.divDelete{
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    padding: 5px;
+}
+.botonDelete{
+    background: red;
+    opacity: 0.7;
+    border: 1px solid;
+    border-radius: 0.2em;
+}

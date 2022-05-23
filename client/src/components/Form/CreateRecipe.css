@@ -1,6 +1,25 @@
-.error{
+.pError{
+    width: 20vh;
     font-size: large;
     color: red;
+}
+.botonBorrado{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    border: solid 2px;
+    border-radius: 0.7em;
+}
+.divLabel{
+    width: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.form{
+    width: 700px;
 }
 .contenedorPlantilla{
     margin-top: 200px;
@@ -40,5 +59,31 @@ select{
     background: red;
     opacity: 0.7;
     border: 1px solid;
-    border-radius: 0.2em;
+    border-radius: 0.7em;
+}
+.input{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 70vh;
+}
+.labelInput{
+    display: flex;
+    justify-content: center;
+    border: solid 1px;
+    border-radius: 0.7em;
+    flex-wrap: wrap;
+    width: 50vh;
+    margin: auto;
+}
+.label{
+    margin: 5px;  
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.inputDiets{
+    margin: 0.2em;
+    width: auto;
 }

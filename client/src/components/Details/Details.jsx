@@ -19,7 +19,7 @@ export default function Detail(props) {
                 Object.keys(myRecipe).length > 0 ?
                     <div>
                         <div className="detailTitulo">
-                            <h1 >{myRecipe.name} </h1>
+                            <h1 className="h1">{myRecipe.name} </h1>
                             <img alt="Img not found" src={myRecipe.image}></img>
                         </div>
                 <div className="contenedorTablas">

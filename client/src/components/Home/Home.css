@@ -32,18 +32,28 @@ body{
     border-color: black;
 }
 
-.paginado {
-    list-style: none;
-    gap: 10px;
-    width: 100%;
-    display:flex;
-    padding: 8px 16px;
-    justify-content: center;
+.paginado  {
+    gap: 30px;
+    display: flex;
+    flex-direction: row;
     
 }
-.paginado .active {
-    background-color: #4CAF50;
-    color: white;
+
+/* .paginado a {
+background-color: gray;
+opacity: 0.5;
+}
+.paginado a.active {
+    background-color: green;
+}
+.paginado:hover:not(.active){
+    background-color: brown;
+} */
+
+.divPaginado{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 .cardConteinter{
     display: flex;

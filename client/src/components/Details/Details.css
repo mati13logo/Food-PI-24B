@@ -12,7 +12,7 @@
     
 }
 .detailTitulo{
-    border: solid 1px;
+    border: solid 2px ;
     background: grey;
     margin: 10px;
     border-radius: 0.7em;
@@ -35,9 +35,23 @@
     flex-direction: row;
     justify-content: center;
 }
+.h1{
+    color: #ffa260;
+    justify-content: center;
+    opacity: 0.8;
+    background: hsl(227, 10%, 10%);
+    border: solid 2px #ffa260;
+    border-radius: 0.7em;
+    width: 900px;
+    margin: 30px;
+    text-align: center;
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
 .h3{
-    background: yellow;
-    border: solid yellow;
+    background: #ffa260;
+    border: solid #ffa260;
     border-radius: 0.7em;
     justify-content: center;
     display: flex;

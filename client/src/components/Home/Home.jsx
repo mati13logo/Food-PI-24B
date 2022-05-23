@@ -20,11 +20,19 @@ export default function Home() {
     const indexOfLastRecipe = currentPage * recipesPerPage
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage
     const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
-
+    
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
-
+    function nextPage(e){
+        e.preventDefault()
+        setCurrentPage(currentPage + 1)
+    }
+    function prevPage(e){
+        e.preventDefault()
+        setCurrentPage(currentPage - 1)
+    }
+    
 
     // console.log(allRecipes)
     useEffect(() => {
@@ -57,6 +65,7 @@ export default function Home() {
         setCurrentPage(1);
         setOrden(`Ordenado ${e.target.value}`)
     }
+
 
     return (
         <div className='contenedor'>
@@ -98,8 +107,7 @@ export default function Home() {
                     return (
                         <div >
                             <Link to={'/home/' + el.id}>
-                                <Card className="card" name={el.name} score={el.score} image={el.image} types={el.types} diets={el.diets} key={el.id} />
-
+                                <Card className="card" name={el.name} score={el.score} image={el.image}  diets={el.diets} key={el.id} />
                             </Link>
 
                         </div>
@@ -107,14 +115,16 @@ export default function Home() {
                 })
                 }
             </div>
-
+        <div className='divPaginado'>
+            <button  disabled={currentPage === 1} onClick={(e)=> prevPage(e)}>Prev</button>
             <Paginado
-                className='paginado'
+                className='paginado '
                 recipesPerPage={recipesPerPage}
                 allRecipes={allRecipes.length}
                 paginado={paginado}
-
-            />
+                />
+                <button disabled={currentPage > allRecipes.length/9} onClick={(e)=>nextPage(e)} >Next</button>
+        </div>
 
         </div>
     )

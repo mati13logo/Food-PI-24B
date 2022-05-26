@@ -9,3 +9,7 @@
     flex-direction: column;
     justify-content: space-around
 }
+.contenedorError404{
+    display: flex;
+    justify-content: center;
+}

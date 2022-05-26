@@ -7,34 +7,20 @@ import Card from '../Card/Card.jsx'
 import Paginado from '../Paginado/Paginado.jsx'
 import SearchBar from '../SearchBar/SearchBar.jsx'
 import './Home.css';
+import Loading from '../Loading/Loading'
 
 export default function Home() {
 
     const dispatch = useDispatch();
     const allRecipes = useSelector((state) => state.recipes)
     const typesAll = useSelector(state => state.types)
-    const [orden, setOrden] = useState('')
-    // console.log(typesAll)
+    const [oreden, setOrden] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [recipesPerPage, setRecipesPerPage] = useState(9)
     const indexOfLastRecipe = currentPage * recipesPerPage
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage
     const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
-    
-    const paginado = (pageNumber) => {
-        setCurrentPage(pageNumber)
-    }
-    function nextPage(e){
-        e.preventDefault()
-        setCurrentPage(currentPage + 1)
-    }
-    function prevPage(e){
-        e.preventDefault()
-        setCurrentPage(currentPage - 1)
-    }
-    
 
-    // console.log(allRecipes)
     useEffect(() => {
         dispatch(getRecipes());
     }, [dispatch])
@@ -42,37 +28,44 @@ export default function Home() {
         dispatch(getTypes())
     }, [dispatch])
 
-
+    
     function handleClick(e) {
         e.preventDefault();
         dispatch(getRecipes())
     }
-
+    
     function handleFilterDiet(e) {
         e.preventDefault();
         dispatch(filterByDiet(e.target.value))
-        // console.log(e.target.value)
+        
     }
     function handleSort(e) {
         e.preventDefault()
         dispatch(orderByName(e.target.value))
         setCurrentPage(1);
-        setOrden(`Ordenado ${e.target.value}`)
+        setOrden(e.target.value)
     }
     function handleSortScore(e) {
         e.preventDefault();
         dispatch(orderByScore(e.target.value))
         setCurrentPage(1);
-        setOrden(`Ordenado ${e.target.value}`)
+        setOrden(e.target.value)
     }
 
-
+    
     return (
+<div >
+
+
+
         <div className='contenedor'>
-            <h1>Recipes</h1>
-            <Link to='/recipe'>
-                <button className='boton'> Create Recipe</button>
-            </Link>
+            <div className='searchBar'>
+                <Link to='/recipe'>
+                    <button className='boton'> Create Recipe</button>
+                </Link>
+                <SearchBar className='searchbar'></SearchBar>
+            </div>
+
             <div className='selectFiltros'>
                 <button className='boton' onClick={e => { handleClick(e) }}>RELEASE</button>
                 <select defaultValue='todo' onChange={e => { handleSort(e) }}>
@@ -90,42 +83,43 @@ export default function Home() {
 
                     <option value='All'> ALL</option>
                     {
-                        typesAll?.map(el => {
+                        typesAll?.map((el) => {
                             return (
                                 <option key={el.id} value={el.name.toLowerCase()}> {el.name.toLowerCase()}</option>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
 
                 </select>
-            </div>
-            <SearchBar className='searchbar'></SearchBar>
+
+            </div >
+                        {allRecipes.length === 0? <Loading/>: 
             <div className='cardConteinter'>
 
                 {currentRecipes?.map((el) => {
-                    //  console.log(allRecipes)
                     return (
                         <div >
                             <Link to={'/home/' + el.id}>
-                                <Card className="card" name={el.name} score={el.score} image={el.image}  diets={el.diets} key={el.id} />
+                                <Card className="card" name={el.name} score={el.score} image={el.image} diets={el.diets} key={el.id}/>
                             </Link>
 
                         </div>
                     )
                 })
-                }
+            }
             </div>
-        <div className='divPaginado'>
-            <button  disabled={currentPage === 1} onClick={(e)=> prevPage(e)}>Prev</button>
-            <Paginado
-                className='paginado '
-                recipesPerPage={recipesPerPage}
-                allRecipes={allRecipes.length}
-                paginado={paginado}
-                />
-                <button disabled={currentPage > allRecipes.length/9} onClick={(e)=>nextPage(e)} >Next</button>
+        }
+            <div className='divPaginado'>
+                <Paginado
+                    className='paginado '
+                    recipesPerPage={recipesPerPage}
+                    allRecipes={allRecipes.length}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    />
+            
+            </div>
         </div>
-
         </div>
     )
 

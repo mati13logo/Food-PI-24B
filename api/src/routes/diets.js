@@ -7,12 +7,11 @@ const dietTypesDb = ["gluten free", "ketogenic", "vegetarian", "lacto vegetarian
 router.get("/", async (req, res, next) => {
 
     try {
-        //recorremos nuestro array de dietas para llenar la base de datos 
         dietTypesDb.forEach(el => {
             Diet.findOrCreate({
                 where: {
-                    name: el
-                } 
+                    name: el 
+                }  
             })
         });
 

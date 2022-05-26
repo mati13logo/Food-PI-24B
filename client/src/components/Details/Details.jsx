@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDetail } from "../../actions";
 import { useEffect } from "react";
 import './Details.css'
+import Loading from "../Loading/Loading";
 
 export default function Detail(props) {
     const myRecipe = useSelector((state) => state.detail)
@@ -13,6 +14,7 @@ export default function Detail(props) {
     useEffect(() => {
         dispatch(getDetail(id))
     }, [dispatch, id])
+    
     return (
         <div className="contenedorDetails">
             {
@@ -42,7 +44,7 @@ export default function Detail(props) {
                             <h3 className="h3">Steps</h3><p>{myRecipe.steps}</p>
                         </div>
                     </div>
-                    </div> : <p>loading..</p>
+                    </div> : <Loading/>
             }
             <Link to='/home'><button className="boton">Back</button></Link>
 

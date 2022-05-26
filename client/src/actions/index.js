@@ -15,29 +15,16 @@ export function filterByDiet(payload) {
         payload
     }
 }
-// export function getTypes() {
-//     return async function (dispatch) {
-//         var json = await axios.get('http://localhost:3001/types')
-//         //    console.log(json)
-//         return (
-//             dispatch({
-//                 type: 'GET_TYPES',
-//                 payload: json.data
-//             })
-//         )
-//     }
-// }
 
 export function getTypes() {
-    return function (dispatch) {
-        return fetch('http://localhost:3001/types')
-            .then(res => res.json())
-            .then(json => {
-                dispatch({
-                    type: 'GET_TYPES',
-                    payload: json
-                })
+    return async function (dispatch) {
+        var json = await axios.get('http://localhost:3001/types')
+        return (
+            dispatch({
+                type: 'GET_TYPES',
+                payload: json.data
             })
+        )
     }
 }
 
@@ -55,36 +42,22 @@ export function orderByScore(payload) {
         payload
     }
 }
-// export function getNameRecipes(name) {
-//     return async function (dispatch) {
-//         try {
-//             var json = await axios.get(`http://localhost:3001/recipes?name=${name}`)
-//             return dispatch({
-//                 type: "GET_NAME_RECIPES",
-//                 payload: json.data
-//             })
-//         }
-//         catch (error) {
-//             console.log(error)
-//         }
-
-//     }
-// }
-
 
 export function getNameRecipes(name) {
-    return function (dispatch) {
-        return fetch(`http://localhost:3001/recipes?name=${name}`)
-            .then(res => res.json())
-            .then(json => {
-                dispatch({
-                    type: "GET_NAME_RECIPES",
-                    payload: json
-                })
+    return async function (dispatch) {
+        try {
+            var json = await axios.get(`http://localhost:3001/recipes?name=${name}`)
+            return dispatch({
+                type: "GET_NAME_RECIPES",
+                payload: json.data
             })
+        }
+        catch (error) {
+            return alert('La receta ingresada no existe')
+        }
+
     }
 }
-
 
 export function postRecipes(payload) {
     return async function (dispatch) {
@@ -93,22 +66,17 @@ export function postRecipes(payload) {
     }
 }
 
-
-
-
-
 export function getDetail(id) {
     return async function (dispatch) {
         try {
             const json = await axios.get(`http://localhost:3001/recipes/${id}`);
-            //   console.log(json.data)
             return dispatch({
                 type: 'GET_DETAIL',
                 payload: json.data[0]
             })
         }
         catch (error) {
-            console.log(error)
+            return alert('El id ingresado no es valido ')
         }
     }
 }

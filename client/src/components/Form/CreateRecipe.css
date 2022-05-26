@@ -21,17 +21,21 @@
 .form{
     width: 700px;
 }
+.contenedorPrin{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .contenedorPlantilla{
-    margin-top: 200px;
     background: grey;
-    /* margin: auto; */
-    margin: auto 45vh auto 45vh;
     border: solid 2px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding: 50px;
     border-radius: 0.7em;
+    align-items: center;
+    width: 700px;
 }
 input{
     width: 200px;

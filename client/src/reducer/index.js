@@ -16,9 +16,10 @@ export function rootReducer(state = initialState, action) {
                 allRecipes: action.payload
             }
 
-            case 'FILTER_BY_DIET':
-                const recipesAll = state.allRecipes
-                let dietFilter = action.payload === "All" ? recipesAll : recipesAll.filter(el => el.diets.some(el => el.name ? el.name === action.payload : el === action.payload))
+        case 'FILTER_BY_DIET':
+            const recipesAll = state.allRecipes
+            let dietFilter = action.payload === "All" ? recipesAll : recipesAll.filter(el => el.diets.some(el => el.name ? el.name === action.payload : el === action.payload))
+
             let vegetarian = [];
             if (action.payload === 'vegetarian') {
                 for (let i = 0; i < recipesAll.length; i++) {
@@ -39,7 +40,6 @@ export function rootReducer(state = initialState, action) {
         case 'ORDER_BY_NAME':
             let orderRecipe = [...state.recipes]
             orderRecipe = orderRecipe.sort((a, b) => {
-                //las mayusculas tienen prioridad en sort
                 if (a.name.toLowerCase() < b.name.toLowerCase()) {
                     return action.payload === "asce" ? -1 : 1;
                 }
@@ -58,19 +58,19 @@ export function rootReducer(state = initialState, action) {
         case 'ORDER_BY_SCORE':
             let sortScore = action.payload === 'mins' ?
                 state.recipes.sort(function (a, b) {
-                    if (a.score > b.score) {
+                    if (a.healthScore > b.healthScore) {
                         return 1;
                     }
-                    if (b.score > a.score) {
+                    if (b.healthScore > a.healthScore) {
                         return -1;
                     }
                     return 0
                 }) :
                 state.recipes.sort(function (a, b) {
-                    if (a.score > b.score) {
+                    if (a.healthScore > b.healthScore) {
                         return -1;
                     }
-                    if (b.score > a.score) {
+                    if (b.healthScore > a.healthScore) {
                         return 1;
                     }
                     return 0
@@ -96,6 +96,7 @@ export function rootReducer(state = initialState, action) {
                 ...state,
                 detail: action.payload
             }
+
 
         default: return state
     }

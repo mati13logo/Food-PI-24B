@@ -6,15 +6,11 @@ const { Recipe, Diet } = require('../db');
 const { ApiKey } = process.env;
 
 
-
 const getApiInfo = async () => {
 
     try {
-
         const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${ApiKey}&addRecipeInformation=true&number=100`)
-        // console.log(apiUrl)
         const apiInfo = await apiUrl.data.results.map(el => {
-            // console.log(el.vegetarian) 
             return {
                 name: el.title,
                 id: el.id,
@@ -26,13 +22,12 @@ const getApiInfo = async () => {
                 types: el.dishTypes?.map(element => element),
                 diets: el.diets?.map(element => element),
                 steps: (el.analyzedInstructions[0] && el.analyzedInstructions[0].steps ? el.analyzedInstructions[0].steps.map(item => item.step).join(" \n") : '')
-
             }
         })
         return apiInfo;
     }
     catch (error) {
-        console.log(error)
+        return alert('No hay mas peticiones')
     }
 };
 
@@ -56,51 +51,6 @@ const getAllRecipe = async () => {
     const infoTotal = apiInfo.concat(dataInfo)
     return infoTotal;
 }
-
-const getIdInfo = async (id) => {
-    const recipeId = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${ApiKey}&includeNutrition=true`)
-    const result = recipeId.data
-    let obj = {
-        name: result.title,
-        vegetarian: result.vegetarian,
-        vegan: result.vegan,
-        glutenFree: result.glutenFree,
-        dairyFree: result.dairyFree,
-        image: result.image,
-        idApi: result.id,
-        score: result.spoonacularScore,
-        healthScore: result.healthScore,
-        diets: result.diets?.map(element => element),
-        types: result.dishTypes?.map(element => element),
-        summary: result.summary,
-        steps: result.instructions
-    }
-    // console.log(obj)
-    return obj
-}
-
-const getIdBdInfo = async (id) => {
-    return await Recipe.findByPk(id, {
-        includes: {
-            model: Diet,
-            attributes: ['name'],
-            through: {
-                attributes: []
-            }
-        }
-    })
-}
-
-// const getAllInfoId = async (id) => {
-//     const apiInfo = getIdInfo(id)
-//     // .log(apiInfo)
-//     const dbInfo = getIdBdInfo(id)
-//     // console.log(dbInfo)
-//     const infoTotal = apiInfo.concat(dbInfo)
-//     return infoTotal
-// }
-
-
 
 
 
@@ -130,6 +80,8 @@ router.get("/:id", async (req, res) => {
             res.status(404).send("No se encontro la receta")
     }
 })
+
+
 router.delete("/:id", async (req, res) => {
     try {
 

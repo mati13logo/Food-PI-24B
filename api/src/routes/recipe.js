@@ -8,12 +8,12 @@ router.post('/', async (req, res) => {
 
     try {
         const {
-            name,
+            name, 
             summary, 
-            score,
-            healthScore,
-            diets, 
-            image, 
+            score, 
+            healthScore, 
+            diets,     
+            image,  
             steps,
         } = req.body
 

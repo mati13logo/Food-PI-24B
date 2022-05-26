@@ -5,6 +5,35 @@ import { getRecipes, getTypes, postRecipes } from "../../actions";
 import './CreateRecipe.css'
 
 
+function validate(input) {
+    let errors = {}
+    let patron = new RegExp('^[ñíóáéú a-zA-Z ]+$')
+
+    if (!input.name) errors.name = 'Name is require'
+    else if (!patron.test(input.name)) {
+        errors.name = 'Invalid character entered'
+    }
+    if (!input.score) errors.score = 'Score is require'
+    else if (!/^([0-9]|[1-9][0-9]|100)$/.test(input.score)) {
+        errors.score = 'The number must be between 0 and 100'
+    }
+    if (!input.summary) errors.summary = 'Summary is require'
+    if (!input.healthScore) errors.healthScore = 'HealthScore is require'
+    else if (!/^([0-9]|[1-9][0-9]|100)$/.test(input.healthScore)) {
+        errors.healthScore = 'The number must be between 0 and 100'
+    }
+    if (!input.steps) errors.steps = 'Steps is require'
+    if (!input.image) errors.image = 'Image is require'
+    else if (!/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/.test(input.image)) {
+        errors.image = 'This is not a picture'
+    } else if (!/.*(png|jpg|jpeg|gif)$/.test(input.image)) {
+        errors.image = 'This is not a picture'
+    }
+
+
+    return errors
+}
+
 
 export default function CreateRecipes() {
     const dispatch = useDispatch();
@@ -13,9 +42,6 @@ export default function CreateRecipes() {
     const [errors, setErrors] = useState({
         name: 'Name is require'
     })
-    const allState = useSelector((state) => state.allRecipes)
-    // console.log(allState)
-
 
     const [input, setInput] = useState({
         name: '',
@@ -27,23 +53,11 @@ export default function CreateRecipes() {
         diets: [],
     })
 
-    function validate(input) {
-        let errors = {}
-
-        if (!input.name) errors.name = 'Name is require'
-        if (!input.score) errors.score = 'Score is require'
-        if (!input.summary) errors.summary = 'Summary is require'
-        if (!input.healthScore) errors.healthScore = 'HealthScore is require'
-        if (!input.steps) errors.steps = 'Steps is require'
-        if (!input.image) errors.image = 'Image is require'
-        return errors
-    }
 
     useEffect(() => {
         dispatch(getTypes())
         dispatch(getRecipes())
     }, []);
-    // console.log(input.diets)
 
     function handleChange(e) {
         setInput({
@@ -56,7 +70,7 @@ export default function CreateRecipes() {
         }))
     }
 
-   
+
     function handleCheck(e) {
         if (e.target.checked) {
             setInput({
@@ -68,17 +82,14 @@ export default function CreateRecipes() {
 
     function handleNumber(e) {
         try {
-            const score = parseInt(e.target.value)
-            if ((Number.isInteger(score)) && (score >= 0) && (score <= 100)) {
-                setInput({
-                    ...input,
-                    [e.target.name]: score
-                })
-                setErrors(validate({
-                    ...input,
-                    [e.target.name]: score
-                }))
-            }
+            setInput({
+                ...input,
+                [e.target.name]: e.target.value
+            })
+            setErrors(validate({
+                ...input,
+                [e.target.name]: e.target.value
+            }))
         } catch {
             console.log('error')
         }
@@ -100,19 +111,9 @@ export default function CreateRecipes() {
         history.push('/home')
     }
 
-    function handleDelete(e) {
-        e.preventDefault()
-        console.log(e)
-        setInput({
-            ...input,
-            diets: input.diets.filter(diets => diets !== e.target.value)
-        })
-        // console.log(e)
-    }
-
 
     return (
-        <div >
+        <div className="contenedorPrin">
             <div className="contenedorPlantilla">
                 <h1>Create Recipe</h1>
 
@@ -186,7 +187,6 @@ export default function CreateRecipes() {
                                 value={input.steps}
                                 name='steps'
                                 onChange={handleChange}
-                                maxLength="250"
                             />
                         </div>
                         <div className="pError">

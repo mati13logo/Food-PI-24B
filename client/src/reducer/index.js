@@ -46,7 +46,6 @@ export function rootReducer(state = initialState, action) {
                 if (a.name.toLowerCase() > b.name.toLowerCase()) {
                     return action.payload === "asce" ? 1 : -1;
                 }
-
                 return 0;
             });
 
@@ -96,8 +95,6 @@ export function rootReducer(state = initialState, action) {
                 ...state,
                 detail: action.payload
             }
-
-
         default: return state
     }
 }

@@ -2,14 +2,13 @@ import React from "react";
 
 export default function Paginado({ recipesPerPage, currentPage, setCurrentPage, allRecipes}) {
     const pageNumber = [];
-
     for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
         pageNumber.push(i)
     }
     const paginado1 = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
-
+    
     function nextPage(e) {
         e.preventDefault()
         setCurrentPage(currentPage + 1)

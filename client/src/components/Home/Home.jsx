@@ -14,9 +14,11 @@ export default function Home() {
     const dispatch = useDispatch();
     const allRecipes = useSelector((state) => state.recipes)
     const typesAll = useSelector(state => state.types)
-    const [oreden, setOrden] = useState('')
+    const [orden, setOrden] = useState('')
+
     const [currentPage, setCurrentPage] = useState(1)
     const [recipesPerPage, setRecipesPerPage] = useState(9)
+    
     const indexOfLastRecipe = currentPage * recipesPerPage
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage
     const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe)

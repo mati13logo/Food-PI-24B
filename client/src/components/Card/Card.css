@@ -40,7 +40,7 @@ p{
 img{
     border-radius: 0.7em;
     border: solid black 2px;
-    margin: 4px;
+    /* margin: 4px; */
     width: 50vh;
     /* height: 50vh; */
     /* height: 100%; */

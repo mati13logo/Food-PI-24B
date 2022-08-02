@@ -29,6 +29,7 @@ function validate(input) {
     } else if (!/.*(png|jpg|jpeg|gif)$/.test(input.image)) {
         errors.image = 'This is not a picture'
     }
+    if (!input.diets.length) errors.diets = 'You must select at least one diet type';
 
 
     return errors
@@ -72,12 +73,25 @@ export default function CreateRecipes() {
 
 
     function handleCheck(e) {
-        if (e.target.checked) {
-            setInput({
-                ...input,
-                diets: [...input.diets, e.target.value]
-            })
+        let newarray = input.diets;
+        let find = newarray.indexOf(e.target.value);
+
+        if (find >= 0) {
+            newarray.splice(find, 1);
+
+        } else {
+            newarray.push(e.target.value)
         }
+
+        setInput({
+            ...input,
+            diets: newarray
+        })
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.value
+        }))
+
     }
 
     function handleNumber(e) {
@@ -212,6 +226,10 @@ export default function CreateRecipes() {
                     <div className="labelInput">
                         {typesAll?.map(el =>
                             (<label className="label"> <input className="inputDiets" type='checkbox' key={el.name} value={el.name} onChange={e => { handleCheck(e) }} /> {el.name} </label>))}
+                    </div>
+                    <div>
+                            {errors.diets && (<p className="rojo">{errors.diets}</p>)}
+
                     </div>
 
 

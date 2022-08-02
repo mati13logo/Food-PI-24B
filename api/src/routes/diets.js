@@ -14,13 +14,15 @@ router.get("/", async (req, res, next) => {
                 }  
             })
         });
-
-        let typesDiet = await Diet.findAll();
+        let typesDiet =  await Diet.findAll()
+        
 
         res.json(typesDiet);
     } catch (error) {
         next(error);
     }
 });
+
+
 
 module.exports = router

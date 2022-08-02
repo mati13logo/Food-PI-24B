@@ -1,14 +1,30 @@
 import axios from 'axios'
 
+// export function getRecipes() {
+//     return async function (dispatch) {
+//         var json = await axios.get('http://localhost:3001/recipes');
+//         return dispatch({
+//             type: 'GET_RECIPES',
+//             payload: json.data
+//         })
+//     }
+// }
+
 export function getRecipes() {
-    return async function (dispatch) {
-        var json = await axios.get('http://localhost:3001/recipes');
-        return dispatch({
-            type: 'GET_RECIPES',
-            payload: json.data
-        })
+    return function (dispatch) {
+        return fetch('http://localhost:3001/recipes')
+            .then(resp => resp.json())
+            .then(json => {
+                dispatch({
+                    type: 'GET_RECIPES',
+                    payload: json
+                })
+            })
     }
 }
+
+
+
 export function filterByDiet(payload) {
     return {
         type: 'FILTER_BY_DIET',
@@ -16,15 +32,28 @@ export function filterByDiet(payload) {
     }
 }
 
+// export function getTypes() {
+//     return async function (dispatch) {
+//         var json = await axios.get('http://localhost:3001/types')
+//         return (
+//             dispatch({
+//                 type: 'GET_TYPES',
+//                 payload: json.data
+//             })
+//         )
+//     }
+// }
+
 export function getTypes() {
-    return async function (dispatch) {
-        var json = await axios.get('http://localhost:3001/types')
-        return (
-            dispatch({
-                type: 'GET_TYPES',
-                payload: json.data
+    return function (dispatch) {
+        return fetch('http://localhost:3001/types')
+            .then(resp => resp.json())
+            .then(json => {
+                dispatch({
+                    type: 'GET_TYPES',
+                    payload: json,
+                })
             })
-        )
     }
 }
 
@@ -66,18 +95,39 @@ export function postRecipes(payload) {
     }
 }
 
+// export function getDetail(id) {
+//     return async function (dispatch) {
+//         try {
+//             const json = await axios.get(`http://localhost:3001/recipes/${id}`);
+//             return dispatch({
+//                 type: 'GET_DETAIL',
+//                 payload: json.data[0]
+//             })
+//         }
+//         catch (error) {
+//             return alert('El id ingresado no es valido ')
+//         }
+//     }
+// }
+
 export function getDetail(id) {
-    return async function (dispatch) {
+    return function (dispatch) {
         try {
-            const json = await axios.get(`http://localhost:3001/recipes/${id}`);
-            return dispatch({
-                type: 'GET_DETAIL',
-                payload: json.data[0]
-            })
+            return fetch(`http://localhost:3001/recipes/${id}`)
+                .then(resp => resp.json())
+                .then(json => {
+                    dispatch({
+                        type: 'GET_DETAIL',
+                        payload: json[0]
+                    })
+                })
+
         }
         catch (error) {
             return alert('El id ingresado no es valido ')
         }
     }
 }
+
+
 
